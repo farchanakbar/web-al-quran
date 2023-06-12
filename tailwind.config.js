@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        arab: url("./src/assets/arab3.ttf"),
+        arab: ["arab", "sans-serif"],
       },
     },
   },

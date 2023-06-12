@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import axios from '../api/axios';
+import {BsFillPlayFill, BsPause} from 'react-icons/bs'
 import { Link, useParams} from 'react-router-dom';
+import ReactPlayer from 'react-player';
 
 function SurahDetail() {
   const {id} = useParams();
   const [surahId, setSurahId] = useState(parseInt(id));
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [currentVerse, setCurrentVerse] = useState(0);
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,6 +47,10 @@ function SurahDetail() {
     })
   };
 
+  function handlePlayVerse() {
+    setCurrentVerse(0);
+  }
+
   return (
     <article>
       {isLoading && <h1>Loading...</h1>}
@@ -53,16 +59,24 @@ function SurahDetail() {
         <span className='p-2 bg-[#526D82] rounded-lg'>{data.numberOfVerses} Ayat</span>
         <span className='p-2 bg-[#526D82] rounded-lg'>{data.revelation?.id}</span>
       </div>
-      <p className='text-white mt-5'>Pengertian : {data.tafsir?.id}</p>
+      <p className='text-white mt-5 text-justify'>Pengertian : {data.tafsir?.id}</p>
       {data && <ul className='flex flex-col gap-[50px] mt-[60px]'>
         {data.verses?.map((item) => (
           <li className='border rounded-md p-4' key={item.number.inSurah}>
-            <div className='flex items-center gap-3'>
+            <div className='flex items-center gap-3 bg-none'>
               <span className='px-3 py-1 rounded-md bg-slate-200'>{item.number.inSurah}</span>
+              {currentVerse === item.number.inSurah ? (
+                <audio src={item.audio.primary} autoPlay onEnded={handlePlayVerse}></audio>
+
+              ) : (
+                <button className='px-3 py-1 rounded-md bg-slate-200' onClick={() => setCurrentVerse(item.number.inSurah)}>
+                  Play
+                </button>
+              )}
             </div>
-            <h1 className='text-white text-5xl leading-relaxed text-end font-arab'>{item.text?.arab}</h1>
-            <p className='text-white mt-10'>{item.text?.transliteration?.en}</p>
-            <p className='text-white mt-10'>Artinya : {item.translation?.id}</p>
+            <h1 className='text-white text-3xl md:text-5xl leading-relaxed text-end font-arab mt-5'>{item.text?.arab}</h1>
+            <p className='text-white mt-5'>{item.text?.transliteration?.en}</p>
+            <p className='text-white mt-5'>Artinya : {item.translation?.id}</p>
           </li>
         ))}
       </ul>}

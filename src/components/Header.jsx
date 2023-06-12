@@ -24,7 +24,7 @@ function Header() {
       <div className='flex items-center gap-5'>
         {/* <input value={input} onChange={HandleSearch} className='border w-[280px] outline-none px-2 py-1 rounded bg-transparent text-white' placeholder='Cari Surah...' type="text" /> */}
         {/* <MdOutlineLightMode size={25} className='text-white cursor-pointer' /> */}
-        <Link className='text-white'>Juz</Link>
+        {/* <Link className='text-white'>Juz</Link> */}
       </div>
     </header>
   )
