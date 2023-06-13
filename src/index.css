@@ -4,10 +4,10 @@
 
 @font-face {
   font-family: "arab";
-  src: url("./assets/arab3.ttf");
+  src: url("./assets/arab4.ttf");
 }
 
 html,
 body {
-  background-color: #03001c;
+  background-color: #18122b;
 }

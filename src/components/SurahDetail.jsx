@@ -74,7 +74,7 @@ function SurahDetail() {
                 </button>
               )}
             </div>
-            <h1 className='text-white text-4xl sm:text-5xl leading-relaxed text-end font-arab mt-5'>{item.text?.arab}</h1>
+            <h5 className='line text-white text-right leading-snug tracking-2 text-4xl mt-5 font-arab sm:text-5xl'>{item.text?.arab}</h5>
             <p className='text-white mt-5 md:mt-10 '>{item.text?.transliteration?.en}</p>
             <p className='text-white mt-5'>Artinya : {item.translation?.id}</p>
           </li>
